@@ -1,53 +1,29 @@
 package com.example.ocelotesoundboard;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
-import android.text.Layout;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "MyActivity";
-	private Button button;
 	private String[] list = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        for(int i=0; i<10;i++){
-//        	Button b = new Button(this);
-//        	b.setText(Integer.toString(i));
-//        }
-//        button = new Button(this);
-//        button.setText("heelo");
-//        ((ViewGroup)findViewById(R.id.layout)).addView(button);
-        
-        File file;
+        setContentView(R.layout.activity_main); 
         File soundDirectory = new File(Environment.getDataDirectory()+File.separator+"sounds");
-        FilenameFilter filter = new FilenameFilter() {
-			
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".mp3") || filename.endsWith(".ogg");
-			}
-		};
         
         //create a directory for custom sounds
         if(!soundDirectory.exists()){
@@ -69,6 +45,7 @@ public class MainActivity extends Activity {
         		String bLabel = list[i].replaceAll("_", " ");
         		bLabel = bLabel.substring(0, bLabel.lastIndexOf('.'));
         		button.setText(bLabel);
+        		button.setTextColor(Color.WHITE);
         		button.setOnClickListener(new View.OnClickListener() {
 					
 					@Override
@@ -79,13 +56,6 @@ public class MainActivity extends Activity {
                 ((ViewGroup)findViewById(R.id.layout)).addView(button);
         	}
         }
-//        //use audio resources
-//        Resources r = getResources();
-//
-//        //uses files that are contained in the directory sounds.
-//        for(final File fileEntry : soundDirectory.listFiles(filter)){
-//        	//create button for this file
-//        }
     }
     
     public void playSound(Button button){
