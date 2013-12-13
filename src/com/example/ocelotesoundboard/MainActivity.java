@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -61,10 +62,17 @@ public class MainActivity extends Activity {
     public void playSound(Button button){
         try {
             AssetFileDescriptor afd = getAssets().openFd(list[button.getId()]);
-            MediaPlayer player = new MediaPlayer();
+            final MediaPlayer player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             player.prepare();
             player.start();
+            player.setOnCompletionListener(new OnCompletionListener() {
+				
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					player.release();					
+				}
+			});
             } 
         catch (IllegalArgumentException e) {    } 
         catch (IllegalStateException e) { } 
