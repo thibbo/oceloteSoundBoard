@@ -1,8 +1,10 @@
-package com.example.ocelotesoundboard;
+package com.thibbo.ocelotesoundboard;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+
+import com.example.ocelotesoundboard.R;
 
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
